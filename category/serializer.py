@@ -9,12 +9,16 @@ class BlogSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    blog = BlogSerializer()
+
     class Meta:
         model = Category
         fields = ('id', 'blog', 'title', 'cat_img')
 
 
 class ZonaSerializer(serializers.ModelSerializer):
+    cat = CategorySerializer(read_only=True)
+
     class Meta:
         model = Zona
         fields = ('id', 'cat', 'choice', 'product')

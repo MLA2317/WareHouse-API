@@ -24,8 +24,8 @@ class ProductItem(models.Model):
     price = models.DecimalField(decimal_places=3, max_digits=7)
     created_date = models.DateTimeField(auto_created=True)
 
-    def __int__(self):
-        return f'{self.product_item.product_name}, Total - {self.quantity * self.product_item.price}'
+    def __str__(self):
+        return f'{self.product_item.product_name}, Total - {self.quantity}'
 
 
 

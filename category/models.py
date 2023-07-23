@@ -18,7 +18,7 @@ class Category(models.Model):
 
 
 class Zona(models.Model):
-    Choice = (
+    Zona = (
         (1, 'ZONA 1'),
         (2, 'ZONA 2'),
         (3, 'ZONA 3'),
@@ -26,7 +26,7 @@ class Zona(models.Model):
         (5, 'ZONA 5')
     )
     cat = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='zona_cat')
-    choice = models.IntegerField(choices=Choice, default=False)
+    choice = models.IntegerField(choices=Zona, default=False)
     product = models.CharField(max_length=221)
 
     def __str__(self):
