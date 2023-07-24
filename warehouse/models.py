@@ -18,39 +18,62 @@ class Warehouse(models.Model):
         return f'{self.user} - {self.prod}{self.prod.quantity} - {self.phone_number} - {self.email} - {self.enter_date}'
 
 
-# class Order(models.Model):
-#     warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE, related_name='ware')
-#     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-#     phone_number = models.CharField(max_length=13, verbose_name='Phone Number')
-#     email = models.EmailField()
-#     day_out = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return f"{self.user}-{self.warehouse}"
-#     # status = models.CharField(max_length=50, choices=(
-#     #     ('pending', 'Pending'),
-#     #     ('processing', 'Processing'),
-#     #     ('shipped', 'Shipped'),
-#     #     ('delivered', 'Delivered'),
-#     #     ('canceled', 'Canceled'),
-#     # ))
-#
-#
-# class OrderItem(models.Model):
-#     Choice = (
-#         (0, 'KG'),
-#         (1, 'COUNT')
-#     )
-#     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
-#     product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
-#     choice = models.IntegerField(choices=Choice, default=0)
-#     quantity = models.PositiveIntegerField(default=0)
-#     day_out = models.DateTimeField(auto_now_add=True)
-#
-#     def get_total(self):
-#         return f'Total - {self.quantity * self.product_item.price}'
-#
-#     def __str__(self):
-#         return f"{self.order}-{self.quantity}- {self.product_item}"
+class Cart(models.Model):
+    client = models.ForeignKey(Account, on_delete=models.CASCADE)
+    war_prod = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.client} || {self.war_prod}'
 
 
+class CartItem(models.Model):
+    carts = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.carts} || Total : {self.quantity * self.carts.war_prod.prod.products.price} Choice {self.carts.war_prod.prod.products.choice}'
+
+
+class Order(models.Model):
+    cart = models.ForeignKey(CartItem, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    address = models.CharField(max_length=220)
+    day_out = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.id} || {self.cart} || {self.phone} || {self.email} || {self.day_out}'
+
+
+
+#
+# class Cart(models.Model):
+#     clients = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='cart')
+#     is_ordered = models.BooleanField(default=False)
+#
+#     @property
+#     def get_cart_items(self):
+#         cart_items = self.cart_items.all()
+#         total = sum([item.quantity for item in cart_items])
+#         return total
+#
+#     @property
+#     def get_cart_total(self):
+#         cart_items = self.cart_items.all()
+#         total = sum([item.get_item_total for item in cart_items])
+#         return total
+#
+#     def __str__(self):
+#         return f"cart of {self.clients} (id: {self.id})"
+#
+#
+# class CartItem(models.Model):
+#     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
+#     warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
+#     quantity = models.IntegerField(default=1)
+#     created_date = models.DateTimeField(auto_now_add=True)
+#
+#     @property
+#     def get_item_total(self):
+#         return f'Your cart - {self.warehouse.prod.products.name}, Total -{self.quantity * self.warehouse.prod.products.price}'

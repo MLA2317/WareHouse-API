@@ -1,20 +1,25 @@
 from rest_framework import serializers
-from product.models import Product, ProductItem
-from category.serializer import ZonaSerializer
+from product.models import Product, ProductImage, ProductItem
 
 
-# class ProductSerializer(serializers.ModelSerializer):
-#     zona = ZonaSerializer()
-#
-#     class Meta:
-#         model = Product
-#         fields = ('id', 'zona', 'brand', 'product_name', 'prod_img', 'description')
-#
-#
-# class ProductItemSerializer(serializers.ModelSerializer):
-#     product_item = ProductSerializer()
-#
-#     class Meta:
-#         model = ProductItem
-#         fields = ('id', 'product_item', 'choice', 'quantity', 'price', 'created_date')
-#
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ('id', 'product', 'prod_img')
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'brand', 'description', 'images', 'choice', 'price')
+
+
+class ProductItemSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(read_only=True)
+
+    class Meta:
+        model = ProductItem
+        fields = ('id', 'products', 'choice', 'quantity', 'created_date')
+
