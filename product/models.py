@@ -3,14 +3,24 @@ from category.models import Zona
 
 
 class Product(models.Model):
-    zona = models.ForeignKey(Zona, on_delete=models.CASCADE, related_name='zona_product_item')
+    name = models.CharField(max_length=220)
     brand = models.CharField(max_length=221)
-    product_name = models.CharField(max_length=220)
-    prod_img = models.ImageField(upload_to='product_item/')
     description = models.TextField()
+    choice = (
+        (1, 'SUM'),
+        (2, '$')
+    )
+    choice = models.IntegerField(choices=choice, default=1)
+    price = models.DecimalField(decimal_places=3, max_digits=7)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.zona} -- {self.brand} -- {self.product_name}'
+        return f'{self.id} || {self.name} - {self.price} ({self.choice})'
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    prod_img = models.ImageField(upload_to='prod_image/')
 
 
 class ProductItem(models.Model):
@@ -18,14 +28,18 @@ class ProductItem(models.Model):
         (1, 'KG'),
         (2, 'COUNT')
     )
-    product_item = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='prod_item')
+    products = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='prod_item')
     choice = models.IntegerField(choices=Choice, default=1)
     quantity = models.IntegerField(default=0)
-    price = models.DecimalField(decimal_places=3, max_digits=7)
     created_date = models.DateTimeField(auto_created=True)
 
     def __str__(self):
-        return f'{self.product_item.product_name}, Total - {self.quantity}'
+        return f'Product - {self.products}, Choice {self.choice} - {self.quantity}, Total - {self.products.price * self.quantity}'
+
+
+
+
+
 
 
 

@@ -1,33 +1,33 @@
-from django.shortcuts import render
-from rest_framework import generics, status, permissions, views
-from rest_framework.exceptions import ValidationError
-from rest_framework.response import Response
-from product.models import Product, ProductItem
-from .serializer import ProductSerializer, ProductItemSerializer
-
-
-class ProductListCreate(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permissions = [permissions.IsAdminUser]
-
-
-class ProductRUD(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permissions = [permissions.IsAdminUser]
-
-
-class ProductItemListCreate(generics.ListCreateAPIView):
-    queryset = ProductItem.objects.all()
-    serializer_class = ProductItemSerializer
-    permissions = [permissions.IsAdminUser]
-
-
-class ProductItemRUD(generics.RetrieveUpdateDestroyAPIView):
-    queryset = ProductItem.objects.all()
-    serializer_class = ProductItemSerializer
-    permissions = [permissions.IsAdminUser]
+# from django.shortcuts import render
+# from rest_framework import generics, status, permissions, views
+# from rest_framework.exceptions import ValidationError
+# from rest_framework.response import Response
+# from product.models import Product, ProductItem
+# from .serializer import ProductSerializer, ProductItemSerializer
+#
+#
+# class ProductListCreate(generics.ListCreateAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     permissions = [permissions.IsAdminUser]
+#
+#
+# class ProductRUD(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     permissions = [permissions.IsAdminUser]
+#
+#
+# class ProductItemListCreate(generics.ListCreateAPIView):
+#     queryset = ProductItem.objects.all()
+#     serializer_class = ProductItemSerializer
+#     permissions = [permissions.IsAdminUser]
+#
+#
+# class ProductItemRUD(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = ProductItem.objects.all()
+#     serializer_class = ProductItemSerializer
+#     permissions = [permissions.IsAdminUser]
 
     # def put(self, request, *args, **kwargs):
     #     try:

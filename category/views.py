@@ -3,6 +3,7 @@ from rest_framework import generics, status, permissions
 from .models import Blog, Category, Zona
 from .serializer import BlogSerializer, CategorySerializer, ZonaSerializer
 
+
 class BlogListCreate(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer

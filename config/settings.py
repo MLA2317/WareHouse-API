@@ -214,6 +214,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'mirsobitovv2317@gmail.com'
 EMAIL_HOST_PASSWORD = 'tzjqdfipeteqvwce'
 EMAIL_PORT = 587
-EMAIL_USE_SSL = False
-EMAIL_TIMEOUT = 300 # in second
-DEFAULT_FROM_EMAIL = 'sender name <your@djangoapp.com>'
+DEFAULT_FROM_EMAIL = 'Omborxona <omborxona@gmail.com>'

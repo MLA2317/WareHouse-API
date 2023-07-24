@@ -1,12 +1,23 @@
 from django.contrib import admin
-from .models import Product, ProductItem
+from .models import Product, ProductImage, ProductItem
 
 
-@admin.register(Product)
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+
+
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'zona', 'brand', 'product_name', 'prod_img', 'description')
+    inlines = [ProductImageInline]
 
 
-@admin.register(ProductItem)
-class ProductItem(admin.ModelAdmin):
-    list_display = ('id', 'product_item', 'choice', 'quantity', 'price', 'created_date')
+admin.site.register(Product, ProductAdmin)
+
+
+# class ProductItemAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'product_item', 'choice', 'quantity', 'price', 'created_date')
+
+
+admin.site.register(ProductItem)
+
+

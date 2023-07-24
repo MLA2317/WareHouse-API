@@ -9,11 +9,11 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'blog', 'title', 'cat_img')
+    list_display = ('id','title', 'cat_img')
 
 
 @admin.register(Zona)
 class ZonaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'cat', 'choice', 'product')
+    list_display = ('id', 'zona', 'product')
 
 
