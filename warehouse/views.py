@@ -1,18 +1,24 @@
-# from django.shortcuts import render
-# from rest_framework import generics, viewsets, serializers
-# from .models import Warehouse, Order, OrderItem
-# from product.models import ProductItem
-# from .serializer import WarehouseSerializer, OrderSerializer, OrderItemSerializer
-#
-#
-# class WarehouseViewSet(viewsets.ModelViewSet):
-#     queryset = Warehouse.objects.all()
-#     serializer_class = WarehouseSerializer
-# #
-# # class WarehouseCreate(generics.CreateAPIView):
-# #     queryset = Warehouse.objects.all()
-# #     serializer_class = WarehousePostSerializer
-# #
+from django.shortcuts import render
+from rest_framework import generics, viewsets, serializers
+from .models import Warehouse, Cart, CartItem, Order
+from product.models import ProductItem
+from .serializer import WarehouseSerializer, CartSerializer, CartItemSerializer
+
+
+class WarehouseViewSet(viewsets.ModelViewSet):
+    queryset = Warehouse.objects.all()
+    serializer_class = WarehouseSerializer
+
+
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+
+
+class CartItemViewSet(viewsets.ModelViewSet):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
+
 # #
 # # class WareHouseList(generics.ListAPIView):
 # #     queryset = Warehouse.objects.all()

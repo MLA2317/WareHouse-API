@@ -2,6 +2,8 @@ from django.db import models
 from account.models import Account
 from category.models import Blog, Category, Zona
 from product.models import Product, ProductItem
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Warehouse(models.Model):
@@ -28,11 +30,17 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     carts = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    prod = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.carts} || Total : {self.quantity * self.carts.war_prod.prod.products.price} Choice {self.carts.war_prod.prod.products.choice}'
+
+    def save(self, *args, **kwargs):
+        self.prod.quantity -= self.quantity
+        self.prod.save()
+        super().save(*args, **kwargs)
 
 
 class Order(models.Model):
@@ -46,6 +54,10 @@ class Order(models.Model):
         return f'{self.id} || {self.cart} || {self.phone} || {self.email} || {self.day_out}'
 
 
+# @receiver(post_save, sender=CartItem)
+# def update_product_quantity(sender, instance, **kwargs):
+#     instance.prod.quantity -= instance.quantity
+#     instance.prod.save()
 
 #
 # class Cart(models.Model):
