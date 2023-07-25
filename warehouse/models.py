@@ -60,32 +60,3 @@ class Order(models.Model):
 #     instance.prod.save()
 
 #
-# class Cart(models.Model):
-#     clients = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='cart')
-#     is_ordered = models.BooleanField(default=False)
-#
-#     @property
-#     def get_cart_items(self):
-#         cart_items = self.cart_items.all()
-#         total = sum([item.quantity for item in cart_items])
-#         return total
-#
-#     @property
-#     def get_cart_total(self):
-#         cart_items = self.cart_items.all()
-#         total = sum([item.get_item_total for item in cart_items])
-#         return total
-#
-#     def __str__(self):
-#         return f"cart of {self.clients} (id: {self.id})"
-#
-#
-# class CartItem(models.Model):
-#     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
-#     warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE)
-#     quantity = models.IntegerField(default=1)
-#     created_date = models.DateTimeField(auto_now_add=True)
-#
-#     @property
-#     def get_item_total(self):
-#         return f'Your cart - {self.warehouse.prod.products.name}, Total -{self.quantity * self.warehouse.prod.products.price}'

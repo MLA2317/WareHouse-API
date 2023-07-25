@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.core.mail import send_mail
 from .models import Warehouse, Cart, CartItem, Order
-from product.serializer import ProductSerializer, ProductItemSerializer
+from product.serializer import ProductItemSerializer
 from category.serializer import BlogSerializer, CategorySerializer, ZonaSerializer
 
 
@@ -30,7 +30,7 @@ class WarehouseSerializer(serializers.ModelSerializer):
         )
 
 
-class CartSerializer(serializers.ModelSerializer):
+class CartGETSerializer(serializers.ModelSerializer):
     war_prod = WarehouseSerializer(read_only=True)
 
     class Meta:
@@ -38,55 +38,36 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ('id', 'client', 'war_prod')
 
 
-class CartItemSerializer(serializers.ModelSerializer):
-    carts = CartSerializer(read_only=True)
+class CartPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ('id', 'client', 'war_prod')
+
+
+class CartItemGETSerializer(serializers.ModelSerializer):
+    carts = CartGETSerializer(read_only=True)
 
     class Meta:
         model = CartItem
         fields = ('id', 'carts', 'prod', 'quantity', 'created_date')
 
 
+class CartItemPOSTSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CartItem
+        fields = ('id', 'carts', 'prod', 'quantity', 'created_date')
 
 
-# class OrderSerializer(serializers.ModelSerializer):
-#     warehouse = WarehouseSerializer(read_only=True)
-#     # print('wa', ware)
-#
-#     class Meta:
-#         model = Order
-#         fields = ('id', 'warehouse', 'user', 'phone_number', 'email')
+class OrderGETSerializer(serializers.ModelSerializer):
+    cart = CartItemGETSerializer(read_only=True)
 
-#
-# class OrderItemGETSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = OrderItem
-#         fields = ('id', 'order', 'product_item', 'choice', 'quantity', 'day_out')
+    class Meta:
+        model = Order
+        fields = ('id', 'cart', 'phone', 'email', 'address', 'day_out')
 
 
-# class OrderItemSerializer(serializers.ModelSerializer):
-#     # product_item = ProductItemSerializer(read_only=True)
-#     order = OrderSerializer(read_only=True)
-#
-#     class Meta:
-#         model = OrderItem
-#         fields = ('id', 'order', 'product_item', 'choice', 'quantity', 'day_out')
-
-# class OrderItemSerializer(serializers.ModelSerializer):
-#     order = OrderSerializer(read_only=True)
-#
-#     class Meta:
-#         model = OrderItem
-#         fields = '__all__'
-#
-#     def create(self, validated_data):
-#         product_item = validated_data.get('product_item')
-#         if product_item.quantity < validated_data.get('quantity', 0):
-#             raise serializers.ValidationError('Bu mahsulot qolmadi!')
-#
-#         # Deduct stock
-#         product_item.quantity -= validated_data.get('quantity', 0)
-#         product_item.save()
-#
-#         # Create OrderItem
-#         order_item = OrderItem.objects.create(**validated_data)
-#         return order_item
+class OrderPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ('id', 'cart', 'phone', 'email', 'address', 'day_out')
