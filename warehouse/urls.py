@@ -1,14 +1,20 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import WarehouseViewSet, CartCreate, CartList, CartRUD, CartItemCreate, CartItemList, CartItemRUD, OrderList, \
+from .views import WarehouseListCreate, WarehouseRUD, CartCreate, CartList, CartRUD, CartItemCreate, CartItemList, CartItemRUD, OrderList, \
     OrderRUD, OrderCreate
 
 
-router = DefaultRouter()
-router.register(r'warehouses', WarehouseViewSet)
+# router = DefaultRouter()
+# router.register(r'warehouses', WarehouseViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+
+    # path('', include(router.urls)),
+
+    path('warehouse/list-create/', WarehouseListCreate.as_view()),
+    path('warehouse/rud/<int:pk>/', WarehouseRUD.as_view()),
+
+
     path('cart/list/', CartList.as_view()),
     path('cart/create/', CartCreate.as_view()),
     path('cart/rud/<int:pk>/', CartRUD.as_view()),

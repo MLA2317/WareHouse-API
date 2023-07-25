@@ -5,7 +5,7 @@ from product.serializer import ProductItemGETSerializer
 from category.serializer import BlogSerializer, CategorySerializer, ZonaSerializer
 
 
-class WarehouseSerializer(serializers.ModelSerializer):
+class WarehouseGETSerializer(serializers.ModelSerializer):
     blog = BlogSerializer(read_only=True)
     cat = CategorySerializer(read_only=True)
     zon = ZonaSerializer(read_only=True)
@@ -30,8 +30,14 @@ class WarehouseSerializer(serializers.ModelSerializer):
         )
 
 
+class WarehousePOSTSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Warehouse
+        fields = ('id', 'user', 'blog', 'cat', 'zon', 'prod', 'phone_number', 'email', 'enter_date')
+
+
 class CartGETSerializer(serializers.ModelSerializer):
-    war_prod = WarehouseSerializer(read_only=True)
+    war_prod = WarehouseGETSerializer(read_only=True)
 
     class Meta:
         model = Cart

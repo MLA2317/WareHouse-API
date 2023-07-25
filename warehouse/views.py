@@ -1,15 +1,30 @@
 from django.shortcuts import render
-from rest_framework import generics, viewsets, serializers, permissions
+from rest_framework import generics, viewsets, serializers, permissions, status
 from .models import Warehouse, Cart, CartItem, Order
+from rest_framework.response import Response
 from product.models import ProductItem
-from .serializer import WarehouseSerializer, CartGETSerializer, CartPostSerializer, CartItemGETSerializer, CartItemPOSTSerializer, \
+from .serializer import WarehouseGETSerializer, WarehousePOSTSerializer, CartGETSerializer, CartPostSerializer, CartItemGETSerializer, CartItemPOSTSerializer, \
     OrderGETSerializer, OrderPostSerializer
 
 
-class WarehouseViewSet(viewsets.ModelViewSet):
+class WarehouseListCreate(generics.ListCreateAPIView):
     queryset = Warehouse.objects.all()
-    serializer_class = WarehouseSerializer
+    # serializer_class = WarehouseGETSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return WarehousePOSTSerializer
+        if self.request.method == 'GET':
+            return WarehouseGETSerializer
+        return Response({'detail': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+class WarehouseRUD(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Warehouse.objects.all()
+    serializer_class = WarehouseGETSerializer
+    permission_classes = [permissions.IsAdminUser]
+    lookup_field = 'pk'
 
 
 class CartList(generics.ListAPIView):
