@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.core.mail import send_mail
 from .models import Warehouse, Cart, CartItem, Order
-from product.serializer import ProductItemSerializer
+from product.serializer import ProductItemGETSerializer
 from category.serializer import BlogSerializer, CategorySerializer, ZonaSerializer
 
 
@@ -9,7 +9,7 @@ class WarehouseSerializer(serializers.ModelSerializer):
     blog = BlogSerializer(read_only=True)
     cat = CategorySerializer(read_only=True)
     zon = ZonaSerializer(read_only=True)
-    prod = ProductItemSerializer(read_only=True)
+    prod = ProductItemGETSerializer(read_only=True)
 
     class Meta:
         model = Warehouse
@@ -49,14 +49,14 @@ class CartItemGETSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CartItem
-        fields = ('id', 'carts', 'prod', 'quantity', 'created_date')
+        fields = ('id', 'carts', 'quantity', 'created_date')
 
 
 class CartItemPOSTSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CartItem
-        fields = ('id', 'carts', 'prod', 'quantity', 'created_date')
+        fields = ('id', 'carts', 'quantity', 'created_date')
 
 
 class OrderGETSerializer(serializers.ModelSerializer):

@@ -30,7 +30,7 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     carts = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    prod = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
+    # prod = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
 
@@ -38,8 +38,8 @@ class CartItem(models.Model):
         return f'{self.carts} || Total : {self.quantity * self.carts.war_prod.prod.products.price} Choice {self.carts.war_prod.prod.products.choice}'
 
     def save(self, *args, **kwargs):
-        self.prod.quantity -= self.quantity
-        self.prod.save()
+        self.carts.war_prod.prod.quantity -= self.quantity
+        self.carts.war_prod.prod.save()
         super().save(*args, **kwargs)
 
 

@@ -3,30 +3,42 @@ from rest_framework import generics, status, permissions, views
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from product.models import Product, ProductImage, ProductItem
-from .serializer import ProductSerializer, ProductItemSerializer
+from .serializer import ProductGETSerializer, ProductPOSTSerializer, ProductItemGETSerializer, ProductItemPOSTSerializer
 
 
-class ProductListCreate(generics.ListCreateAPIView):
+class ProductList(generics.ListAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductGETSerializer
     permissions = [permissions.IsAdminUser]
+
+
+class ProductCreate(generics.CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductPOSTSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 
 class ProductRUD(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductGETSerializer
     permissions = [permissions.IsAdminUser]
 
 
-class ProductItemListCreate(generics.ListCreateAPIView):
+class ProductItemList(generics.ListAPIView):
     queryset = ProductItem.objects.all()
-    serializer_class = ProductItemSerializer
+    serializer_class = ProductItemGETSerializer
     permissions = [permissions.IsAdminUser]
+
+
+class ProductItemCreate(generics.CreateAPIView):
+    queryset = ProductItem.objects.all()
+    serializer_class = ProductItemPOSTSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 
 class ProductItemRUD(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProductItem.objects.all()
-    serializer_class = ProductItemSerializer
+    serializer_class = ProductItemGETSerializer
     permissions = [permissions.IsAdminUser]
 #
 #
