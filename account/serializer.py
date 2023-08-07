@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Account, MyProduct
 from django.contrib.auth import authenticate
 from rest_framework.exceptions import AuthenticationFailed
+from product.serializer import ProductPOSTSerializer
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -60,6 +61,8 @@ class MyProfileSerializer(serializers.ModelSerializer):
 
 
 class MyProductSellerSerializer(serializers.ModelSerializer):
+    products = ProductPOSTSerializer(required=True)
+
     class Meta:
         model = MyProduct
         fields = ['id', 'author', 'products', 'created_date']
