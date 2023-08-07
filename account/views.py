@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from rest_framework import generics, serializers, status, permissions
 from rest_framework.response import Response
-from .serializer import RegisterSerializer, LoginSerializer
-from .models import Account
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from .serializer import RegisterSerializer, LoginSerializer, MyProfileSerializer, MyProductCustomerSerializer,\
+    MyProductSellerSerializer
+from .models import Account, MyProduct
+from .permission import IsOwnerReadOnly
 
 
 class RegisterAPI(generics.GenericAPIView):
@@ -25,8 +28,27 @@ class LoginAPI(generics.GenericAPIView):
         return Response({'tokens': serializer.data['tokens']}, status=status.HTTP_200_OK)
 
 
+class MyProfileList(generics.ListAPIView):
+    serializer_class = MyProfileSerializer
+    queryset = Account.objects.all()
+    permission_classes = [IsOwnerReadOnly]
 
 
+class MySellerListCreate(generics.ListCreateAPIView):
+    queryset = MyProduct.objects.all()
+    serializer_class = MyProductSellerSerializer
+    permission_classes = (IsAuthenticated, IsOwnerReadOnly)
+
+    def get_serializer_context(self):
+        ctx = super().get_serializer_context()
+        ctx['author'] = self.request.user
+        return ctx
+
+
+class MyCustomerList(generics.ListAPIView):
+    queryset = MyProduct.objects.all()
+    serializer_class = MyProductCustomerSerializer
+    permission_classes = (IsOwnerReadOnly, IsAuthenticated)
 
 
 
