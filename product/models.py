@@ -8,7 +8,7 @@ class Product(models.Model):
     description = models.TextField()
     choice = (
         (1, 'SUM'),
-        (2, '$')
+        (2, 'Dollar $')
     )
     choice = models.IntegerField(choices=choice, default=1)
     price = models.DecimalField(decimal_places=3, max_digits=7)
