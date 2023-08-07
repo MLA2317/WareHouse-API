@@ -27,6 +27,7 @@ class WarehouseRUD(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'pk'
 
 
+
 class CartList(generics.ListAPIView):
     queryset = Cart.objects.all()
     serializer_class = CartGETSerializer

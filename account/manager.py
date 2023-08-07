@@ -23,6 +23,9 @@ class AccountManager(BaseUserManager):
         user.is_superuser = True
         user.is_staff = True
         user.is_active = True
+        user.role = 0
+        user.is_seller = False
+        user.is_costumer = False
         user.save(using=self._db)
         return user
 

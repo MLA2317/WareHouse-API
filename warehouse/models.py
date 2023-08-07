@@ -59,4 +59,3 @@ class Order(models.Model):
 #     instance.prod.quantity -= instance.quantity
 #     instance.prod.save()
 
-#
