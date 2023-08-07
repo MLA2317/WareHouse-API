@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, serializers, status, permissions
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .serializer import RegisterSerializer, LoginSerializer, MyProfileSerializer, MyProductCustomerSerializer,\
+from .serializer import RegisterSerializer, LoginSerializer, MyProfileSerializer, MyProductCustomerSerializer, \
     MyProductSellerSerializer
 from .models import Account, MyProduct
 from .permission import IsOwnerReadOnly

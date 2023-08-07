@@ -24,7 +24,7 @@ class ProductRUD(generics.RetrieveUpdateDestroyAPIView):
     permissions = [permissions.IsAdminUser]
 
 
-class ProductImageCreate(generics.CreateAPIView):
+class ProductImageList(generics.ListAPIView):
     queryset = ProductImage.objects.all()
     serializer_class = ProductImageSerializer
     permission_classes = permissions.IsAuthenticated
