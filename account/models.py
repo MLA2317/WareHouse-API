@@ -73,19 +73,17 @@ class MyProduct(models.Model):
         return self.author
 
 
-def account_post_save(instance, sender, created, *args, **kwargs):
-    if created:
-        if instance.role == 1:
-            instance.is_seller = True
-        elif instance.role == 2:
-            instance.is_customer = True
-        elif instance.role == 0:
-            instance.is_staff = True
-        else:
-            instance.is_staff = False
-    instance.save()
+def account_pre_save(instance, sender, *args, **kwargs):
+    if instance.role == 1:
+        instance.is_seller = True
+    elif instance.role == 2:
+        instance.is_customer = True
+    elif instance.role == 0:
+        instance.is_staff = True
+    else:
+        instance.is_staff = False
 
 
-post_save.connect(account_post_save, sender=Account)
+pre_save.connect(account_pre_save, sender=Account)
 
 
