@@ -1,13 +1,12 @@
-from django.urls import path, include
+# from django.urls import path, include
 # from rest_framework.routers import DefaultRouter
-# from .views import WarehouseListCreate, WarehouseRUD, CartCreate, CartList, CartRUD, CartItemCreate, CartItemList, CartItemRUD, OrderList, \
-#     OrderRUD, OrderCreate
-#
+# from .views import WarehouseListCreate, WarehouseRUD, LocationListCreate, OrderListCreate, OrderRUD, OrderProdCreateList,\
+#     OrderProdRUD, LeavingList, LeavingCreate, LeavingRUD
 #
 # # router = DefaultRouter()
 # # router.register(r'warehouses', WarehouseViewSet)
 #
-urlpatterns = [
+# urlpatterns = [
 #
 #     # path('', include(router.urls)),
 #
@@ -15,16 +14,16 @@ urlpatterns = [
 #     path('warehouse/rud/<int:pk>/', WarehouseRUD.as_view()),
 #
 #
-#     path('cart/list/', CartList.as_view()),
-#     path('cart/create/', CartCreate.as_view()),
-#     path('cart/rud/<int:pk>/', CartRUD.as_view()),
+#     path('location/list-create/', LocationListCreate.as_view()),
 #
-#     path('cartItem/list/', CartItemList.as_view()),
-#     path('cartItem/create/', CartItemCreate.as_view()),
-#     path('cartItem/rud/<int:pk>/', CartItemRUD.as_view()),
-#
-#     path('order/list/', OrderList.as_view()),
-#     path('order/create/', OrderCreate.as_view()),
+#     path('order/create-list/', OrderListCreate.as_view()),
 #     path('order/rud/<int:pk>/', OrderRUD.as_view()),
-]
-
+#
+#     path('order-prod/list-create/', OrderProdCreateList.as_view()),
+#     path('order-prod/rud/<int:pk>/', OrderProdRUD.as_view()),
+#
+#     path('leaving/list/', LeavingList.as_view()),
+#     path('leaving/create/', LeavingCreate.as_view()),
+#     path('leaving/rud/<int:pk>/', LeavingRUD.as_view()),
+# ]
+#

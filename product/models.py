@@ -16,8 +16,11 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField()
     created_date = models.DateTimeField(auto_now_add=True)
 
+    def total_price(self):
+        return self.price * self.quantity
+
     def __str__(self):
-        return f'{self.id} || {self.name} - {self.price} ({self.choice})'
+        return f'{self.id} || {self.name} - {self.price} - {self.quantity} - ({self.choice}). Total: {self.total_price()}'
 
 
 class ProductImage(models.Model):
