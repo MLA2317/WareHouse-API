@@ -17,6 +17,8 @@ class ProductGETSerializer(serializers.ModelSerializer):
 
 
 class ProductPOSTSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, required=False)
+
     class Meta:
         model = Product
         fields = ('id', 'name', 'brand', 'description', 'images', 'choice', 'price', 'category_id', 'quantity',)

@@ -7,4 +7,4 @@ from .serializer import CategorySerializer
 class CategoryListCreate(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permissions = [permissions.IsAuthenticated]
+    permissions = [permissions.IsAdminUser]

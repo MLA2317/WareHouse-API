@@ -1,16 +1,21 @@
 # from django.contrib import admin
-# from .models import Warehouse, Cart, CartItem, Order
+# from .models import Warehouse, Order, OrderProduct, Leaving
 #
 #
-# @admin.register(Warehouse)
-# class WareHouseAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'user', 'blog', 'cat', 'zon', 'prod', 'phone_number', 'email', 'enter_date')
-#     date_hierarchy = 'enter_date'
+# class WarehouseAdmin(admin.ModelAdmin):
+#     list_display = ('user', 'phone_number', 'email', 'location', 'enter_date')
+#     search_fields = ['user__username', 'phone_number', 'email', 'location']
+#     list_filter = ('enter_date',)
 #
 #
-# @admin.register(Cart)
-# class CartAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'client', 'war_prod')
+# class OrderAdmin(admin.ModelAdmin):
+#     list_display = ('customer_id', 'status')
+#     search_fields = ['customer_id__username', 'status']
+#     list_filter = ('status',)
+#
+#
+# admin.site.register(Warehouse, WarehouseAdmin)
+# admin.site.register(Order, OrderAdmin)
 #
 #
 # @admin.register(CartItem)

@@ -27,5 +27,4 @@ urlpatterns = [
 #     path('order/create/', OrderCreate.as_view()),
 #     path('order/rud/<int:pk>/', OrderRUD.as_view()),
 ]
-#
-#
+
