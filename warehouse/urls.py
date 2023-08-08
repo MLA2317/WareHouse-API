@@ -1,4 +1,4 @@
-# from django.urls import path, include
+from django.urls import path, include
 # from rest_framework.routers import DefaultRouter
 # from .views import WarehouseListCreate, WarehouseRUD, LocationListCreate, OrderListCreate, OrderRUD, OrderProdCreateList,\
 #     OrderProdRUD, LeavingList, LeavingCreate, LeavingRUD
@@ -6,7 +6,7 @@
 # # router = DefaultRouter()
 # # router.register(r'warehouses', WarehouseViewSet)
 #
-# urlpatterns = [
+urlpatterns = [
 #
 #     # path('', include(router.urls)),
 #
@@ -25,5 +25,5 @@
 #     path('leaving/list/', LeavingList.as_view()),
 #     path('leaving/create/', LeavingCreate.as_view()),
 #     path('leaving/rud/<int:pk>/', LeavingRUD.as_view()),
-# ]
+]
 #

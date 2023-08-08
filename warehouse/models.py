@@ -49,15 +49,11 @@
 #     products = models.ManyToManyField(Product, related_name='order')
 #     quantity = models.PositiveIntegerField()
 #
-#     # def total_quantity(self):
-#
-#
-#     # def Order(self):
-#     #     return ", ".join([str(o) for o in self.order_id.all()])
-#     #
-#     # def __str__(self):
-#     #     return f'{self.order_id} || {self.order_id.customer_id} -- {self.products} - {self.quantity}'
-#     #
+#     def save(self, *args, **kwargs):
+#         super().save(*args, **kwargs)
+#         for product in self.products.all():
+#             product.quantity -= self.quantity
+#             product.save()
 #
 #
 # class Leaving(models.Model):
