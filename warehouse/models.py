@@ -49,8 +49,12 @@ class OrderProduct(models.Model):
     products = models.ManyToManyField(Product, related_name='order')
     quantity = models.PositiveIntegerField()
 
-    def __str__(self):
-        return self.order_id
+    # def Order(self):
+    #     return ", ".join([str(o) for o in self.order_id.all()])
+    #
+    # def __str__(self):
+    #     return f'{self.order_id} || {self.order_id.customer_id} -- {self.products} - {self.quantity}'
+    #
 
 
 class Leaving(models.Model):
@@ -58,5 +62,5 @@ class Leaving(models.Model):
     day_out = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.order_prod_id
+        return f'{self.order_prod_id} {self.day_out}'
 

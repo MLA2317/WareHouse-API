@@ -1,33 +1,30 @@
-from rest_framework import serializers
-from django.core.mail import send_mail
-from .models import Warehouse
-from category.serializer import CategorySerializer
-
+# from rest_framework import serializers
+# from django.core.mail import send_mail
+# from .models import Warehouse, Order, OrderProduct, Leaving, Location
+# from product.serializer import ProductGETSerializer
 #
-# class WarehouseGETSerializer(serializers.ModelSerializer):
-#     cat = CategorySerializer(read_only=True)
-#     prod = ProductItemGETSerializer(read_only=True)
+#
+# class LocationSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Location
+#         fields = ('id', 'title')
+#
+#
+# class WarehouseSerializer(serializers.ModelSerializer):
+#     products = ProductGETSerializer(many=True, read_only=True)
 #
 #     class Meta:
 #         model = Warehouse
-#         fields = ('id', 'user', 'blog', 'cat', 'zon', 'prod', 'phone_number', 'email', 'enter_date')
+#         fields = ('id', 'user', 'products', 'phone_number', 'email', 'location', 'enter_date')
 #
-#     def create(self, validated_data):
-#         warehouse = super().create(validated_data)
-#         self.send_notification(warehouse)
-#         return warehouse
 #
-#     def send_notification(self, Warehouse):
-#         send_mail(
-#             'Warehouse Company!',
-#             f'Sizning Mahsulotingiz omborxonada joylandi. Mahsulot Nomi: {Warehouse.prod.product_name}.',
-#             'omborxona@gmail.com',
-#             [Warehouse.email],
-#             fail_silently=False,
-#         )
-
+# class OrderSerializer(serializers.ModelSerializer):
+#     warehouse_id = WarehouseSerializer(many=True, read_only=True)
 #
-# class WarehousePOSTSerializer(serializers.ModelSerializer):
 #     class Meta:
-#         model = Warehouse
-#         fields = ('id', 'user', 'blog', 'cat', 'zon', 'prod', 'phone_number', 'email', 'enter_date')
+#         model = Order
+#         fields = ('id', 'warehouse_id', 'customer_id', 'status')
+#
+#
+# class OrderProductSerializer(serializers.ModelSerializer):
+#
