@@ -28,7 +28,7 @@ class WarehousePostSerializer(serializers.ModelSerializer):
 
 class OrderGetSerializer(serializers.ModelSerializer):
     warehouse_id = WarehouseGetSerializer(many=True, read_only=True)
-    customer_id = MyProfileCustomSerializer(read_only=True,)
+    customer_id = MyProfileCustomSerializer(read_only=True)
 
     class Meta:
         model = Order
