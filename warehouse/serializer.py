@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.core.mail import send_mail
 from .models import Warehouse, Order, OrderProduct, Leaving, Location
 from product.serializer import ProductGETSerializer
-from account.serializer import MyProfileSerializer
+from account.serializer import MyProfileCustomSerializer
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -28,7 +28,7 @@ class WarehousePostSerializer(serializers.ModelSerializer):
 
 class OrderGetSerializer(serializers.ModelSerializer):
     warehouse_id = WarehouseGetSerializer(many=True, read_only=True)
-    customer_id = MyProfileSerializer(read_only=True,)
+    customer_id = MyProfileCustomSerializer(read_only=True,)
 
     class Meta:
         model = Order
