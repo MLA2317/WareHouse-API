@@ -17,7 +17,7 @@ class ProductGETSerializer(serializers.ModelSerializer):
 
 
 class ProductPOSTSerializer(serializers.ModelSerializer):
-    images = ProductImageSerializer(many=True, required=False)
+    # images = ProductImageSerializer(many=True, required=False)
 
     class Meta:
         model = Product
