@@ -54,10 +54,16 @@ class LoginSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class MyProfileSerializer(serializers.ModelSerializer):
+class MyProfileCustomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ('id', 'username', 'bio', 'avatar', 'gender', 'role', 'is_customer', 'is_seller', 'is_active', 'created_date', 'modified_date')
+        fields = ('id', 'username', 'bio', 'avatar')
+
+
+class MyProfileSellerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ('id', 'username', 'bio', 'avatar')
 
 
 class MyProductSellerSerializer(serializers.ModelSerializer):
