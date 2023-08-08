@@ -3,8 +3,8 @@
 # from .models import Warehouse, Order, OrderProduct, Leaving, Location
 # from rest_framework.response import Response
 # from product.models import Product
-# from .serializer import WarehouseSerializer, OrderSerializer, OrderProductSerializer, LocationSerializer, \
-#     LeavingGetSerializer, LeavingPostSerializer
+# from .serializer import WarehouseGetSerializer, WarehousePostSerializer, LocationSerializer, OrderGetSerializer,\
+#     OrderPostSerializer, OrderProductGetSerializer, OrderProductPostSerializer, LeavingGetSerializer, LeavingPostSerializer
 #
 #
 # class LocationListCreate(generics.ListCreateAPIView):
@@ -13,49 +13,58 @@
 #     permission_classes = [permissions.IsAuthenticated]
 #
 #
-# class WarehouseListCreate(generics.ListCreateAPIView):
+# class WarehouseList(generics.ListAPIView):
 #     queryset = Warehouse.objects.all()
-#     # serializer_class = WarehouseGETSerializer
+#     serializer_class = WarehouseGetSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+#
+#
+# class WarehouseCreate(generics.CreateAPIView):
+#     queryset = Warehouse.objects.all()
+#     serializer_class = WarehousePostSerializer
 #     permission_classes = [permissions.IsAuthenticated]
 #
 #
 # class WarehouseRUD(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Warehouse.objects.all()
-#     serializer_class = WarehouseSerializer
+#     serializer_class = WarehousePostSerializer
 #     permission_classes = [permissions.IsAdminUser]
 #     lookup_field = 'pk'
 #
-#
-#
-# class OrderListCreate(generics.CreateAPIView):
+# class OrderList(generics.ListAPIView):
 #     queryset = Order.objects.all()
-#     serializer_class = OrderSerializer
+#     serializer_class = OrderGetSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+#
+#
+# class OrderCreate(generics.CreateAPIView):
+#     queryset = Order.objects.all()
+#     serializer_class = OrderPostSerializer
 #     permission_classes = [permissions.IsAuthenticated]
 #
 #
 # class OrderRUD(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Order.objects.all()
-#     serializer_class = OrderSerializer
+#     serializer_class = OrderPostSerializer
 #     lookup_field = 'pk'
 #     permission_classes = [permissions.IsAuthenticated]
 #
 #
-# class OrderProdCreateList(generics.ListCreateAPIView):
+# class OrderProdCreate(generics.CreateAPIView):
 #     queryset = OrderProduct.objects.all()
-#     serializer_class = OrderProductSerializer
+#     serializer_class = OrderProductPostSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+#
+#
+# class OrderProdList(generics.ListAPIView):
+#     queryset = OrderProduct.objects.all()
+#     serializer_class = OrderProductGetSerializer
 #     permission_classes = [permissions.IsAuthenticated]
 #
 #
 # class OrderProdRUD(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Order.objects.all()
-#     serializer_class = OrderSerializer
-#     lookup_field = 'pk'
-#     permission_classes = [permissions.IsAuthenticated]
-#
-#
-# class CartItemRUD(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = OrderProduct.objects.all()
-#     serializer_class = OrderProductSerializer
+#     serializer_class = OrderProductPostSerializer
 #     lookup_field = 'pk'
 #     permission_classes = [permissions.IsAuthenticated]
 #
