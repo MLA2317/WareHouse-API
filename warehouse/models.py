@@ -37,7 +37,7 @@ class Order(models.Model):
     customer_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     status = models.CharField(max_length=7, choices=STATUS)
 
-    def warehouse_names(self):
+    def warehouse_names_id(self):
         return ", ".join([str(w) for w in self.warehouse_id.all()])
 
     def __str__(self):
