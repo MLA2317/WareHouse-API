@@ -27,4 +27,15 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class OrderProductSerializer(serializers.ModelSerializer):
+    order_id = OrderSerializer(many=True, read_only=True)
+    quantity = serializers.CharField(max_length=100)
 
+    class Meta:
+        model = OrderProduct
+        fields = ('id', 'order_id', 'products', 'quantity')
+
+
+class LeavingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Leaving
+        fields = ('id', 'order_prod_id', 'day_out')
